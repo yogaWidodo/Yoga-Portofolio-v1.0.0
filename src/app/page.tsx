@@ -1,5 +1,5 @@
-import ImageRounded from "@/components/ImageRounded";
 import Carousel, { CarouselImage } from "@/components/Carousel";
+import CertificateCard from "@/components/CertificateCard";
 import ProjectCard from "@/components/ProjectCard";
 
 const HERO_IMAGES: CarouselImage[] = [
@@ -38,7 +38,10 @@ const GALLERY_IMAGES: CarouselImage[] = [
 export default function Home() {
   return (
     <div className="p-10">
-      <section className="relative pt-32 pb-16 px-6 text-center overflow-hidden">
+      <section
+        id="home"
+        className="mt-70 px-4 md:px-12 bg-white dark:bg-black text-center"
+      >
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
             Full Stack Developer. <br />
@@ -65,6 +68,11 @@ export default function Home() {
             </a>
           </div>
         </div>
+      </section>
+      <section
+        id="about"
+        className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
+      >
         <div className="mt-20 flex flex-col md:flex-row justify-center items-center gap-10">
           <div className="w-full md:w-1/2">
             <Carousel images={HERO_IMAGES} aspectRatio="aspect-4/5" />
@@ -100,26 +108,95 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
           <ProjectCard
             title="IDMS"
-            description="Inventory Dealer Management System (IDMS) is a comprehensive CMS for Setir Kanan using for manage all the activity behind the Setir Kanan Website"
+            subtitle="Inventory Dealer Management System (IDMS) is a comprehensive CMS for Setir Kanan using for manage all the activity behind the Setir Kanan Website"
             imageSrc="idms.png"
             imageAlt="Dashboard UI with productivity charts"
+            techStack=".NET + Bootstrap + PostgreSQL"
           />
           <ProjectCard
-            title="IDMS"
-            description="Inventory Dealer Management System (IDMS) is a comprehensive CMS for Setir Kanan using for manage all the activity behind the Setir Kanan Website"
-            imageSrc="idms.png"
+            title="Sehati"
+            subtitle="Developed an AI-powered web platform for early mental health screening, integrating DASS-21 & LSTM-based deep learning model for sentiment analysis."
+            imageSrc="Sehati.png"
             imageAlt="Dashboard UI with productivity charts"
+            techStack="Python + React + FastAPI"
+          />
+          <ProjectCard
+            title="My Al-Quran"
+            subtitle="Developed a personalized Quran application with a clean and beautiful UI, completely free and ad-free to ensure an uninterrupted reading experience"
+            imageSrc="MyAlquran.jpg"
+            imageAlt="Dashboard UI with productivity charts"
+            techStack="Kotlin"
+          />
+          <ProjectCard
+            title="Berijajan"
+            subtitle="QR based digital reward system that replaces manual physical vouchers and reducing administrative overhead to distribute pre-funded performance rewards"
+            imageSrc="Berijajan.png"
+            imageAlt="Dashboard UI with productivity charts"
+            techStack="Next.js + Supabase + Tailwind"
+          />
+        </div>
+      </section>
+
+      <section className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950">
+        <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
+          Certificates
+        </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="project-card group relative md:col-span-2 lg:col-span-2 h-[600px] rounded-3xl bg-apple-gray dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl">
+            <CertificateCard
+              title="Berijalan - Bootcamp Batch 15"
+              description="Fullstack Developer"
+              imageSrc="/certi/berijalan.png"
+              imageAlt="Berijalan - Bootcamp Batch 15"
+              pdfUrl="/pdf/berijalan.pdf"
+              techStack="Next.js + Tailwind + Angular Js + PostgreSQL + Reac Native + .NET + Spring Boot"
+            />
+          </div>
+          <CertificateCard
+            title="Coding Camp 2025"
+            description="Machine Learning Engineer"
+            imageSrc="/certi/codingcamp.png"
+            imageAlt="Coding Camp 2025"
+            pdfUrl="/pdf/codingcamp.pdf"
+            techStack="Python + TensorFlow + Keras"
+          />
+          <CertificateCard
+            title="Bank Syariah Indonesia"
+            description="Backend Developer"
+            imageSrc="/certi/itdeveloper.png"
+            imageAlt="IT-Developer Bank Syariah Indonesia"
+            pdfUrl="/pdf/itdeveloper.pdf"
+            techStack="Java + Spring Boot"
+          />
+          <CertificateCard
+            title="Bangkit Academy"
+            description="Mobile Developer"
+            imageSrc="/certi/bangkit.png"
+            imageAlt="Mobile Developer Bangkit Academy"
+            pdfUrl="/pdf/bangkit.pdf"
+            techStack="Kotlin + Firebase"
+          />
+
+          <CertificateCard
+            title="Bitlabs Academy"
+            description="Data Analyst"
+            imageSrc="/certi/bitlabs.png"
+            imageAlt="Bitlabs Academy"
+            pdfUrl="/pdf/bitlabs.pdf"
+            techStack="Python + Pandas + Tableau"
           />
         </div>
       </section>
 
       {/* Gallery */}
-      <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
-        Gallery
-      </span>
-      <div className="">
-        <Carousel images={GALLERY_IMAGES} aspectRatio="aspect-16/9" />
-      </div>
+      <section className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950">
+        <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
+          Gallery
+        </span>
+        <div className="">
+          <Carousel images={GALLERY_IMAGES} aspectRatio="aspect-16/9" />
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="pt-16 pb-8 px-6">
@@ -151,11 +228,6 @@ export default function Home() {
                 </li>
                 <li>
                   <a className="hover:underline" href="#">
-                    Twitter / X
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:underline" href="#">
                     Instagram
                   </a>
                 </li>
@@ -172,35 +244,11 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a className="hover:underline" href="#">
-                    Book a Call
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:underline" href="#">
-                    Newsletter
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h6 className="text-xs font-bold mb-4 uppercase tracking-wider">
-                Legal
-              </h6>
-              <ul className="text-xs space-y-3 text-gray-600 dark:text-gray-400">
-                <li>
-                  <a className="hover:underline" href="#">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:underline" href="#">
-                    Terms of Use
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:underline" href="#">
-                    Cookies
+                  <a
+                    className="hover:underline"
+                    href="https://wa.me/6288233181003"
+                  >
+                    WhatsApp
                   </a>
                 </li>
               </ul>
@@ -212,11 +260,7 @@ export default function Home() {
             </p>
             <div className="flex gap-6 text-[11px] text-gray-500">
               <a className="hover:underline" href="#">
-                United States
-              </a>
-              <span className="hidden md:inline border-l border-gray-300 dark:border-white/20 h-3 my-auto"></span>
-              <a className="hover:underline" href="#">
-                English
+                Indonesia
               </a>
             </div>
           </div>

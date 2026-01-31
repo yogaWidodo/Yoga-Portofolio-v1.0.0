@@ -3,40 +3,36 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-interface ProjectCardProps {
+interface CertificateCardProps {
   title: string;
-  subtitle: string;
+  description: string;
   imageSrc: string;
   imageAlt: string;
-  techStack: string;
+  techStack?: string;
   buttonText?: string;
-  pdfUrl?: string; // Added pdfUrl support
-  className?: string;
+  pdfUrl?: string;
 }
 
-const ProjectCard = ({
+const CertificateCard = ({
   title,
-  subtitle,
+  description,
   imageSrc,
   imageAlt,
   techStack,
   buttonText = "View Details",
   pdfUrl,
-  className = "",
-}: ProjectCardProps) => {
+}: CertificateCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div
-      className={`project-card group relative h-[500px] rounded-3xl bg-apple-gray dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl ${className}`}
-    >
-      <div className="p-10 text-center z-10">
+    <div className="project-card relative group overflow-hidden rounded-3xl bg-[#f5f5f7] dark:bg-card-dark h-full p-10 flex flex-col justify-between border border-transparent dark:border-white/5 transition-all duration-500 hover:shadow-2xl">
+      <div className="text-center md:text-left">
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
+        <p className="text-gray-500">{description}</p>
       </div>
-      <div className="flex-1 w-full overflow-hidden flex items-end">
+      <div className="flex justify-center -mb-20 transform group-hover:-translate-y-10 transition-transform duration-500">
         <img
           alt={imageAlt}
-          className="w-full h-full object-cover translate-y-10 group-hover:translate-y-0 transition-transform duration-700"
+          className="rounded-xl shadow-lg w-4/5"
           src={imageSrc}
         />
       </div>
@@ -55,7 +51,7 @@ const ProjectCard = ({
           <iframe
             src={pdfUrl}
             className="w-full h-full border-none"
-            title={`${title} Project PDF`}
+            title={`${title} PDF`}
           />
         </Modal>
       )}
@@ -63,4 +59,4 @@ const ProjectCard = ({
   );
 };
 
-export default ProjectCard;
+export default CertificateCard;

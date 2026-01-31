@@ -14,18 +14,27 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-6 text-xs font-medium tracking-tight text-gray-600 dark:text-gray-400">
             <a
               className="hover:text-primary transition-colors"
+              href="#home"
+            >
+              Home
+            </a>
+            <a
+              className="hover:text-primary transition-colors"
               href="#projects"
             >
               Projects
             </a>
             <a
               className="hover:text-primary transition-colors"
-              href="#activity"
+              href="#certificates"
             >
-              Contributions
+              Certificates
             </a>
             <a className="hover:text-primary transition-colors" href="#about">
               About
+            </a>
+            <a className="hover:text-primary transition-colors" href="#gallery">
+              Gallery
             </a>
             <a className="hover:text-primary transition-colors" href="#contact">
               Contact
