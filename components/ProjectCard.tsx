@@ -27,7 +27,7 @@ const ProjectCard = ({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div
-      className={`project-card group relative h-[500px] rounded-3xl bg-apple-gray dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl ${className}`}
+      className={`project-card group relative h-[500px] rounded-3xl bg-[#f5f5f7] dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl ${className}`}
     >
       <div className="p-10 text-center z-10">
         <h3 className="text-2xl font-bold mb-2">{title}</h3>

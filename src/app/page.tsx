@@ -1,6 +1,9 @@
 import Carousel, { CarouselImage } from "@/components/Carousel";
 import CertificateCard from "@/components/CertificateCard";
 import ProjectCard from "@/components/ProjectCard";
+import TechStackCard from "@/components/TechStackCard";
+import GithubContributions from "@/components/GithubContributions";
+import { GitHubCalendar } from "react-github-calendar";
 
 const HERO_IMAGES: CarouselImage[] = [
   {
@@ -12,6 +15,31 @@ const HERO_IMAGES: CarouselImage[] = [
     alt: "Workspace 2",
   },
 ];
+
+const stackData = [
+  {
+    category: "Frontend",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Angular JS"],
+    icon: "data_object",
+  },
+  {
+    category: "Backend",
+    skills: [".NET", "Spring Boot", "FastAPI", "Java", "Python"],
+    icon: "dns",
+  },
+  {
+    category: "Mobile",
+    skills: ["React Native", "Kotlin", "Firebase"],
+    icon: "smartphone",
+  },
+  {
+    category: "Database & Tools",
+    skills: ["PostgreSQL", "Supabase", "Git", "TensorFlow", "Pandas"],
+    icon: "build",
+  },
+];
+
+const GITHUB_USERNAME = "yogaWidodo";
 
 const GALLERY_IMAGES: CarouselImage[] = [
   {
@@ -112,6 +140,7 @@ export default function Home() {
             imageSrc="idms.png"
             imageAlt="Dashboard UI with productivity charts"
             techStack=".NET + Bootstrap + PostgreSQL"
+            buttonText="Berijalan Member of Astra"
           />
           <ProjectCard
             title="Sehati"
@@ -119,6 +148,7 @@ export default function Home() {
             imageSrc="Sehati.png"
             imageAlt="Dashboard UI with productivity charts"
             techStack="Python + React + FastAPI"
+            buttonText="Coding Camp By DBS Foundation"
           />
           <ProjectCard
             title="My Al-Quran"
@@ -126,6 +156,7 @@ export default function Home() {
             imageSrc="MyAlquran.jpg"
             imageAlt="Dashboard UI with productivity charts"
             techStack="Kotlin"
+            buttonText="Bangkit Academy 2023 Batch 2"
           />
           <ProjectCard
             title="Berijajan"
@@ -133,11 +164,15 @@ export default function Home() {
             imageSrc="Berijajan.png"
             imageAlt="Dashboard UI with productivity charts"
             techStack="Next.js + Supabase + Tailwind"
+            buttonText="Berijalan Member of Astra"
           />
         </div>
       </section>
 
-      <section className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950">
+      <section
+        id="certificates"
+        className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
+      >
         <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
           Certificates
         </span>
@@ -188,8 +223,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        id="stack"
+        className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
+      >
+        <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-12 block">
+          Tech Stack
+        </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stackData.map((item, idx) => (
+            <TechStackCard
+              key={idx}
+              category={item.category}
+              skills={item.skills}
+              icon={item.icon}
+            />
+          ))}
+        </div>
+      </section>
+
       {/* Gallery */}
-      <section className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950">
+      <section
+        id="gallery"
+        className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
+      >
         <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
           Gallery
         </span>
@@ -200,8 +257,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="pt-16 pb-8 px-6">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mb-16">
             <div className="col-span-2 lg:col-span-1">
               <span className="material-icons-round text-2xl mb-4">
                 terminal
@@ -217,17 +274,26 @@ export default function Home() {
               </h6>
               <ul className="text-xs space-y-3 text-gray-600 dark:text-gray-400">
                 <li>
-                  <a className="hover:underline" href="#">
+                  <a
+                    className="hover:underline"
+                    href="https://github.com/yogaWidodo"
+                  >
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a className="hover:underline" href="#">
+                  <a
+                    className="hover:underline"
+                    href="https://www.linkedin.com/in/yogawidodo/"
+                  >
                     LinkedIn
                   </a>
                 </li>
                 <li>
-                  <a className="hover:underline" href="#">
+                  <a
+                    className="hover:underline"
+                    href="https://www.instagram.com/ygyog_/?hl=en"
+                  >
                     Instagram
                   </a>
                 </li>
@@ -239,7 +305,10 @@ export default function Home() {
               </h6>
               <ul className="text-xs space-y-3 text-gray-600 dark:text-gray-400">
                 <li>
-                  <a className="hover:underline" href="#">
+                  <a
+                    className="hover:underline"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=yogawidodo1411@gmail.com"
+                  >
                     Email Me
                   </a>
                 </li>
@@ -253,7 +322,21 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+            <div className="col-span-2 md:col-span-4 lg:col-span-2 overflow-hidden">
+              <h6 className="text-xs font-bold mb-4 uppercase tracking-wider">
+                GitHub Contributions
+              </h6>
+              <div className="w-full overflow-x-auto">
+                <GitHubCalendar
+                  username="yogaWidodo"
+                  fontSize={10}
+                  blockSize={8}
+                  blockMargin={3}
+                />
+              </div>
+            </div>
           </div>
+
           <div className="border-t border-gray-200 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-[11px] text-gray-500">
               Copyright © 2024 Portfolio Dev Inc. All rights reserved.

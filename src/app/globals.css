@@ -1,10 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
 @theme {
   --color-primary: var(--primary);
-  --color-background-light: #fbfbfd;
+  --color-background-light: #ffffff;
   --color-background-dark: #000000;
   --color-card-light: #ffffff;
   --color-card-dark: #1d1d1f;
