@@ -43,15 +43,15 @@ const GITHUB_USERNAME = "yogaWidodo";
 
 const GALLERY_IMAGES: CarouselImage[] = [
   {
-    src: "1.jpg",
+    src: "a.jpg",
     alt: "Workspace 1",
   },
   {
-    src: "2.jpg",
+    src: "b.jpg",
     alt: "Workspace 2",
   },
   {
-    src: "3.jpg",
+    src: "c.jpg",
     alt: "Workspace 3",
   },
   {
@@ -59,7 +59,7 @@ const GALLERY_IMAGES: CarouselImage[] = [
     alt: "Workspace 4",
   },
   {
-    src: "5.jpg",
+    src: "d.jpg",
     alt: "Workspace 5",
   },
 ];
