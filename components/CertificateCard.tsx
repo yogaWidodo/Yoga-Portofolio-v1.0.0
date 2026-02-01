@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Modal from "./Modal";
 
 interface CertificateCardProps {
@@ -29,11 +30,13 @@ const CertificateCard = ({
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
         <p className="text-gray-500">{description}</p>
       </div>
-      <div className="flex justify-center -mb-20 transform group-hover:-translate-y-10 transition-transform duration-500">
-        <img
+      <div className="flex justify-center -mb-20 transform group-hover:-translate-y-10 transition-transform duration-500 relative h-48 w-full mt-4">
+        <Image
           alt={imageAlt}
-          className="rounded-xl shadow-lg w-4/5"
-          src={imageSrc}
+          fill
+          className="rounded-xl shadow-lg object-contain"
+          src={imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`}
+          sizes="(max-width: 768px) 80vw, 30vw"
         />
       </div>
       <div className="project-overlay absolute inset-0 bg-primary/95 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center translate-y-4 group-hover:translate-y-0 z-20">

@@ -3,7 +3,7 @@ import CertificateCard from "@/components/CertificateCard";
 import ProjectCard from "@/components/ProjectCard";
 import TechStackCard from "@/components/TechStackCard";
 import GithubContributions from "@/components/GithubContributions";
-import { GitHubCalendar } from "react-github-calendar";
+import GitHubCalendarClient from "@/components/GitHubCalendarClient";
 
 const HERO_IMAGES: CarouselImage[] = [
   {
@@ -326,14 +326,7 @@ export default function Home() {
               <h6 className="text-xs font-bold mb-4 uppercase tracking-wider">
                 GitHub Contributions
               </h6>
-              <div className="w-full overflow-x-auto">
-                <GitHubCalendar
-                  username="yogaWidodo"
-                  fontSize={10}
-                  blockSize={8}
-                  blockMargin={3}
-                />
-              </div>
+              <GitHubCalendarClient username="yogaWidodo" />
             </div>
           </div>
 

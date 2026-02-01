@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Modal from "./Modal";
 
 interface ProjectCardProps {
@@ -33,11 +34,13 @@ const ProjectCard = ({
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
       </div>
-      <div className="flex-1 w-full overflow-hidden flex items-end">
-        <img
+      <div className="flex-1 w-full overflow-hidden relative flex items-end">
+        <Image
           alt={imageAlt}
-          className="w-full h-full object-cover translate-y-10 group-hover:translate-y-0 transition-transform duration-700"
-          src={imageSrc}
+          fill
+          className="object-cover translate-y-10 group-hover:translate-y-0 transition-transform duration-700"
+          src={imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`}
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
       <div className="project-overlay absolute inset-0 bg-primary/95 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center translate-y-4 group-hover:translate-y-0 z-20">
