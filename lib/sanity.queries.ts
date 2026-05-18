@@ -40,7 +40,11 @@ export async function getProjects(): Promise<Project[]> {
       ),
       techStack,
       buttonText,
-      link
+      link,
+      "carouselImages": carouselImages[]{
+        "src": asset->url,
+        alt
+      }
     }`
   )
 }

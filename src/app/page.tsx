@@ -236,6 +236,7 @@ export default async function Home() {
               imageAlt={project.imageAlt ?? project.title}
               techStack={project.techStack}
               buttonText={project.buttonText}
+              carouselImages={project.carouselImages}
             />
           ))}
         </div>

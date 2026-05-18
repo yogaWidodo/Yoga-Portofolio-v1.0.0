@@ -31,6 +31,26 @@ export const projectType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'carouselImages',
+      title: 'Project Carousel Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              validation: (Rule) => Rule.required(),
+            }
+          ]
+        }
+      ],
+      description: 'Daftar gambar untuk carousel di dalam detail project (modal)'
+    }),
+    defineField({
       name: 'techStack',
       title: 'Tech Stack',
       type: 'string',

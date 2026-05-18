@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Modal from "./Modal";
+import Carousel from "./Carousel";
 
 interface ProjectCardProps {
   title: string;
@@ -12,6 +13,7 @@ interface ProjectCardProps {
   techStack: string;
   buttonText?: string;
   pdfUrl?: string; // Added pdfUrl support
+  carouselImages?: Array<{ src: string; alt: string }>; // Added carouselImages
   className?: string;
 }
 
@@ -23,6 +25,7 @@ const ProjectCard = ({
   techStack,
   buttonText = "View Details",
   pdfUrl,
+  carouselImages,
   className = "",
 }: ProjectCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +63,13 @@ const ProjectCard = ({
             className="w-full h-full border-none"
             title={`${title} Project PDF`}
           />
+        ) : carouselImages && carouselImages.length > 0 ? (
+          <div className="w-full h-full min-h-[50vh] flex flex-col justify-center">
+            <Carousel
+              images={carouselImages.map(img => ({ ...img, objectFit: "contain" }))}
+              aspectRatio="aspect-video"
+            />
+          </div>
         ) : (
           <div className="relative w-full h-full min-h-[60vh] flex items-center justify-center">
             <Image

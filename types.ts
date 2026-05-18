@@ -8,6 +8,7 @@ export interface Project {
   techStack: string
   buttonText: string
   link?: string
+  carouselImages?: Array<{ src: string; alt: string }>
 }
 
 export interface Certificate {
