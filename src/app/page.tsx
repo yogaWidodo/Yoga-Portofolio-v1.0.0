@@ -2,21 +2,101 @@ import Carousel, { CarouselImage } from "@/components/Carousel";
 import CertificateCard from "@/components/CertificateCard";
 import ProjectCard from "@/components/ProjectCard";
 import TechStackCard from "@/components/TechStackCard";
-import GithubContributions from "@/components/GithubContributions";
 import GitHubCalendarClient from "@/components/GitHubCalendarClient";
+import { getHero, getProjects, getCertificates, getTechStack } from "@/lib/sanity.queries";
+import { Hero, Project, Certificate, TechStack } from "@/types";
 
-const HERO_IMAGES: CarouselImage[] = [
+// ─── Fallback data (dipakai jika Sanity belum ada konten) ──────────────────────
+const FALLBACK_HERO: Hero = {
+  headline: "Full Stack Developer.",
+  subheadline: "Architect of experiences.",
+  tagline: "Building products with precision, performance, and a touch of magic.",
+  aboutTitle: "Fullstack Developer",
+  aboutDescription:
+    "with strong experience in building scalable, high-performance web applications using React, Next.js, TypeScript, and modern front-end architectures. Experienced in collaborating closely with Business Analysts and System Analysts to translate business requirements and system specifications into responsive, maintainable user interfaces, while delivering reliable API-integrated solutions and optimized user experiences in enterprise environments.",
+  githubUsername: "yogaWidodo",
+  linkedinUrl: "https://www.linkedin.com/in/yogawidodo/",
+  instagramUrl: "https://www.instagram.com/ygyog_/?hl=en",
+  email: "yogawidodo1411@gmail.com",
+  whatsapp: "6288233181003",
+};
+
+const FALLBACK_PROJECTS: Project[] = [
   {
-    src: "hero1.png",
-    alt: "Workspace 1",
+    title: "IDMS",
+    subtitle:
+      "Inventory Dealer Management System (IDMS) is a comprehensive CMS for Setir Kanan using for manage all the activity behind the Setir Kanan Website",
+    imageSrc: "idms.png",
+    techStack: ".NET + Bootstrap + PostgreSQL",
+    buttonText: "Berijalan Member of Astra",
   },
   {
-    src: "hero2.png",
-    alt: "Workspace 2",
+    title: "Sehati",
+    subtitle:
+      "Developed an AI-powered web platform for early mental health screening, integrating DASS-21 & LSTM-based deep learning model for sentiment analysis.",
+    imageSrc: "Sehati.png",
+    techStack: "Python + React + FastAPI",
+    buttonText: "Coding Camp By DBS Foundation",
+  },
+  {
+    title: "My Al-Quran",
+    subtitle:
+      "Developed a personalized Quran application with a clean and beautiful UI, completely free and ad-free to ensure an uninterrupted reading experience",
+    imageSrc: "MyAlquran.jpg",
+    techStack: "Kotlin",
+    buttonText: "Bangkit Academy 2023 Batch 2",
+  },
+  {
+    title: "Berijajan",
+    subtitle:
+      "QR based digital reward system that replaces manual physical vouchers and reducing administrative overhead to distribute pre-funded performance rewards",
+    imageSrc: "Berijajan.png",
+    techStack: "Next.js + Supabase + Tailwind",
+    buttonText: "Berijalan Member of Astra",
   },
 ];
 
-const stackData = [
+const FALLBACK_CERTIFICATES: Certificate[] = [
+  {
+    title: "Berijalan - Bootcamp Batch 15",
+    description: "Fullstack Developer",
+    imageSrc: "/certi/berijalan.png",
+    pdfUrl: "/pdf/berijalan.pdf",
+    techStack:
+      "Next.js + Tailwind + Angular Js + PostgreSQL + React Native + .NET + Spring Boot",
+    featured: true,
+  },
+  {
+    title: "Coding Camp 2025",
+    description: "Machine Learning Engineer",
+    imageSrc: "/certi/codingcamp.png",
+    pdfUrl: "/pdf/codingcamp.pdf",
+    techStack: "Python + TensorFlow + Keras",
+  },
+  {
+    title: "Bank Syariah Indonesia",
+    description: "Backend Developer",
+    imageSrc: "/certi/itdeveloper.png",
+    pdfUrl: "/pdf/itdeveloper.pdf",
+    techStack: "Java + Spring Boot",
+  },
+  {
+    title: "Bangkit Academy",
+    description: "Mobile Developer",
+    imageSrc: "/certi/bangkit.png",
+    pdfUrl: "/pdf/bangkit.pdf",
+    techStack: "Kotlin + Firebase",
+  },
+  {
+    title: "Bitlabs Academy",
+    description: "Data Analyst",
+    imageSrc: "/certi/bitlabs.png",
+    pdfUrl: "/pdf/bitlabs.pdf",
+    techStack: "Python + Pandas + Tableau",
+  },
+];
+
+const FALLBACK_TECH_STACK: TechStack[] = [
   {
     category: "Frontend",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Angular JS"],
@@ -39,46 +119,58 @@ const stackData = [
   },
 ];
 
-const GITHUB_USERNAME = "yogaWidodo";
+const HERO_IMAGES: CarouselImage[] = [
+  { src: "hero1.png", alt: "Workspace 1" },
+  { src: "hero2.png", alt: "Workspace 2" },
+];
 
 const GALLERY_IMAGES: CarouselImage[] = [
-  {
-    src: "a.jpg",
-    alt: "Workspace 1",
-  },
-  {
-    src: "b.jpg",
-    alt: "Workspace 2",
-  },
-  {
-    src: "c.jpg",
-    alt: "Workspace 3",
-  },
-  {
-    src: "4.jpeg",
-    alt: "Workspace 4",
-  },
-  {
-    src: "d.jpg",
-    alt: "Workspace 5",
-  },
+  { src: "a.jpg", alt: "Gallery 1" },
+  { src: "b.jpg", alt: "Gallery 2" },
+  { src: "c.jpg", alt: "Gallery 3" },
+  { src: "4.jpeg", alt: "Gallery 4" },
+  { src: "d.jpg", alt: "Gallery 5" },
 ];
-export default function Home() {
+
+export default async function Home() {
+  // Fetch dari Sanity, gunakan fallback jika gagal / belum ada data
+  let hero = FALLBACK_HERO;
+  let projects = FALLBACK_PROJECTS;
+  let certificates = FALLBACK_CERTIFICATES;
+  let techStack = FALLBACK_TECH_STACK;
+
+  try {
+    const [heroData, projectsData, certificatesData, techStackData] =
+      await Promise.all([getHero(), getProjects(), getCertificates(), getTechStack()]);
+
+    if (heroData) hero = heroData;
+    if (projectsData?.length) projects = projectsData;
+    if (certificatesData?.length) certificates = certificatesData;
+    if (techStackData?.length) techStack = techStackData;
+  } catch (err) {
+    // Sanity belum terkonfigurasi atau offline — gunakan fallback
+    console.warn("Sanity fetch failed, using fallback data:", err);
+  }
+
+  const featuredCert = certificates.find((c) => c.featured);
+  const otherCerts = certificates.filter((c) => !c.featured);
+
   return (
     <div className="p-10">
+      {/* ── Hero ── */}
       <section
         id="home"
         className="mt-70 px-4 md:px-12 bg-white dark:bg-black text-center"
       >
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
-            Full Stack Developer. <br />
+            {hero.headline} <br />
             <span className="text-gray-400 dark:text-gray-600">
-              Architect of experiences.
+              {hero.subheadline}
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Building products with precision, performance, and a touch of magic.
+            {hero.tagline}
           </p>
           <div className="flex items-center justify-center gap-4">
             <a
@@ -97,6 +189,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── About ── */}
       <section
         id="about"
         className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
@@ -108,21 +202,15 @@ export default function Home() {
           <div className="w-full md:w-1/2">
             <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed text-justify">
               <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
-                Fullstack Developer
+                {hero.aboutTitle}
               </span>
-              with strong experience in building scalable, high-performance web
-              applications using React, Next.js, TypeScript, and modern
-              front-end architectures. Experienced in collaborating closely with
-              Business Analysts and System Analysts to translate business
-              requirements and system specifications into responsive,
-              maintainable user interfaces, while delivering reliable
-              API-integrated solutions and optimized user experiences in
-              enterprise environments.
+              {hero.aboutDescription}
             </p>
           </div>
         </div>
       </section>
 
+      {/* ── Projects ── */}
       <section
         className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
         id="projects"
@@ -131,44 +219,24 @@ export default function Home() {
           <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
             Projects
           </span>
-          Here are some of my favorite projects I've worked on.
+          Here are some of my favorite projects I&apos;ve worked on.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
-          <ProjectCard
-            title="IDMS"
-            subtitle="Inventory Dealer Management System (IDMS) is a comprehensive CMS for Setir Kanan using for manage all the activity behind the Setir Kanan Website"
-            imageSrc="idms.png"
-            imageAlt="Dashboard UI with productivity charts"
-            techStack=".NET + Bootstrap + PostgreSQL"
-            buttonText="Berijalan Member of Astra"
-          />
-          <ProjectCard
-            title="Sehati"
-            subtitle="Developed an AI-powered web platform for early mental health screening, integrating DASS-21 & LSTM-based deep learning model for sentiment analysis."
-            imageSrc="Sehati.png"
-            imageAlt="Dashboard UI with productivity charts"
-            techStack="Python + React + FastAPI"
-            buttonText="Coding Camp By DBS Foundation"
-          />
-          <ProjectCard
-            title="My Al-Quran"
-            subtitle="Developed a personalized Quran application with a clean and beautiful UI, completely free and ad-free to ensure an uninterrupted reading experience"
-            imageSrc="MyAlquran.jpg"
-            imageAlt="Dashboard UI with productivity charts"
-            techStack="Kotlin"
-            buttonText="Bangkit Academy 2023 Batch 2"
-          />
-          <ProjectCard
-            title="Berijajan"
-            subtitle="QR based digital reward system that replaces manual physical vouchers and reducing administrative overhead to distribute pre-funded performance rewards"
-            imageSrc="Berijajan.png"
-            imageAlt="Dashboard UI with productivity charts"
-            techStack="Next.js + Supabase + Tailwind"
-            buttonText="Berijalan Member of Astra"
-          />
+          {projects.map((project, idx) => (
+            <ProjectCard
+              key={project._id ?? project.id ?? idx}
+              title={project.title}
+              subtitle={project.subtitle}
+              imageSrc={project.imageSrc}
+              imageAlt={project.imageAlt ?? project.title}
+              techStack={project.techStack}
+              buttonText={project.buttonText}
+            />
+          ))}
         </div>
       </section>
 
+      {/* ── Certificates ── */}
       <section
         id="certificates"
         className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
@@ -177,52 +245,33 @@ export default function Home() {
           Certificates
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="project-card group relative md:col-span-2 lg:col-span-2 h-[600px] rounded-3xl bg-apple-gray dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl">
+          {featuredCert && (
+            <div className="project-card group relative md:col-span-2 lg:col-span-2 h-[600px] rounded-3xl bg-apple-gray dark:bg-card-dark overflow-hidden flex flex-col border border-gray-100 dark:border-white/5 transition-all duration-500 hover:shadow-2xl">
+              <CertificateCard
+                title={featuredCert.title}
+                description={featuredCert.description}
+                imageSrc={featuredCert.imageSrc}
+                imageAlt={featuredCert.imageAlt ?? featuredCert.title}
+                pdfUrl={featuredCert.pdfUrl}
+                techStack={featuredCert.techStack}
+              />
+            </div>
+          )}
+          {otherCerts.map((cert, idx) => (
             <CertificateCard
-              title="Berijalan - Bootcamp Batch 15"
-              description="Fullstack Developer"
-              imageSrc="/certi/berijalan.png"
-              imageAlt="Berijalan - Bootcamp Batch 15"
-              pdfUrl="/pdf/berijalan.pdf"
-              techStack="Next.js + Tailwind + Angular Js + PostgreSQL + Reac Native + .NET + Spring Boot"
+              key={cert._id ?? idx}
+              title={cert.title}
+              description={cert.description}
+              imageSrc={cert.imageSrc}
+              imageAlt={cert.imageAlt ?? cert.title}
+              pdfUrl={cert.pdfUrl}
+              techStack={cert.techStack}
             />
-          </div>
-          <CertificateCard
-            title="Coding Camp 2025"
-            description="Machine Learning Engineer"
-            imageSrc="/certi/codingcamp.png"
-            imageAlt="Coding Camp 2025"
-            pdfUrl="/pdf/codingcamp.pdf"
-            techStack="Python + TensorFlow + Keras"
-          />
-          <CertificateCard
-            title="Bank Syariah Indonesia"
-            description="Backend Developer"
-            imageSrc="/certi/itdeveloper.png"
-            imageAlt="IT-Developer Bank Syariah Indonesia"
-            pdfUrl="/pdf/itdeveloper.pdf"
-            techStack="Java + Spring Boot"
-          />
-          <CertificateCard
-            title="Bangkit Academy"
-            description="Mobile Developer"
-            imageSrc="/certi/bangkit.png"
-            imageAlt="Mobile Developer Bangkit Academy"
-            pdfUrl="/pdf/bangkit.pdf"
-            techStack="Kotlin + Firebase"
-          />
-
-          <CertificateCard
-            title="Bitlabs Academy"
-            description="Data Analyst"
-            imageSrc="/certi/bitlabs.png"
-            imageAlt="Bitlabs Academy"
-            pdfUrl="/pdf/bitlabs.pdf"
-            techStack="Python + Pandas + Tableau"
-          />
+          ))}
         </div>
       </section>
 
+      {/* ── Tech Stack ── */}
       <section
         id="stack"
         className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
@@ -231,9 +280,9 @@ export default function Home() {
           Tech Stack
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stackData.map((item, idx) => (
+          {techStack.map((item, idx) => (
             <TechStackCard
-              key={idx}
+              key={item._id ?? idx}
               category={item.category}
               skills={item.skills}
               icon={item.icon}
@@ -242,7 +291,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* ── Gallery ── */}
       <section
         id="gallery"
         className="py-20 px-4 md:px-12 bg-white dark:bg-zinc-950"
@@ -250,12 +299,12 @@ export default function Home() {
         <span className="text-primary text-5xl md:text-6xl font-bold tracking-tight mb-4 block">
           Gallery
         </span>
-        <div className="">
+        <div>
           <Carousel images={GALLERY_IMAGES} aspectRatio="aspect-16/9" />
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ── Footer ── */}
       <footer className="pt-16 pb-8 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mb-16">
@@ -265,7 +314,7 @@ export default function Home() {
               </span>
               <p className="text-xs text-gray-500 leading-relaxed max-w-xs">
                 Crafting digital experiences with an obsession for detail and
-                simplicity. Let's build something extraordinary together.
+                simplicity. Let&apos;s build something extraordinary together.
               </p>
             </div>
             <div>
@@ -276,24 +325,18 @@ export default function Home() {
                 <li>
                   <a
                     className="hover:underline"
-                    href="https://github.com/yogaWidodo"
+                    href={`https://github.com/${hero.githubUsername}`}
                   >
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="hover:underline"
-                    href="https://www.linkedin.com/in/yogawidodo/"
-                  >
+                  <a className="hover:underline" href={hero.linkedinUrl}>
                     LinkedIn
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="hover:underline"
-                    href="https://www.instagram.com/ygyog_/?hl=en"
-                  >
+                  <a className="hover:underline" href={hero.instagramUrl}>
                     Instagram
                   </a>
                 </li>
@@ -307,7 +350,7 @@ export default function Home() {
                 <li>
                   <a
                     className="hover:underline"
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=yogawidodo1411@gmail.com"
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${hero.email}`}
                   >
                     Email Me
                   </a>
@@ -315,7 +358,7 @@ export default function Home() {
                 <li>
                   <a
                     className="hover:underline"
-                    href="https://wa.me/6288233181003"
+                    href={`https://wa.me/${hero.whatsapp}`}
                   >
                     WhatsApp
                   </a>
@@ -326,7 +369,7 @@ export default function Home() {
               <h6 className="text-xs font-bold mb-4 uppercase tracking-wider">
                 GitHub Contributions
               </h6>
-              <GitHubCalendarClient username="yogaWidodo" />
+              <GitHubCalendarClient username={hero.githubUsername} />
             </div>
           </div>
 
