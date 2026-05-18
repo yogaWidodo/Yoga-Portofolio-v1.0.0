@@ -6,6 +6,8 @@ import GitHubCalendarClient from "@/components/GitHubCalendarClient";
 import { getHero, getProjects, getCertificates, getTechStack } from "@/lib/sanity.queries";
 import { Hero, Project, Certificate, TechStack } from "@/types";
 
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
 // ─── Fallback data (dipakai jika Sanity belum ada konten) ──────────────────────
 const FALLBACK_HERO: Hero = {
   headline: "Full Stack Developer.",
