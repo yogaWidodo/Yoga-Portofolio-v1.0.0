@@ -46,22 +46,32 @@ const ProjectCard = ({
       <div className="project-overlay absolute inset-0 bg-primary/95 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center translate-y-4 group-hover:translate-y-0 z-20">
         <h4 className="text-xl font-bold mb-4">{techStack}</h4>
         <button
-          onClick={() => pdfUrl && setIsOpen(true)}
+          onClick={() => setIsOpen(true)}
           className="bg-white text-primary px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition-transform"
         >
           {buttonText}
         </button>
       </div>
 
-      {pdfUrl && (
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title={title}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title={title}>
+        {pdfUrl ? (
           <iframe
             src={pdfUrl}
             className="w-full h-full border-none"
             title={`${title} Project PDF`}
           />
-        </Modal>
-      )}
+        ) : (
+          <div className="relative w-full h-full min-h-[60vh] flex items-center justify-center">
+            <Image
+              alt={imageAlt}
+              fill
+              className="object-contain"
+              src={imageSrc.startsWith("/") || imageSrc.startsWith("http") ? imageSrc : `/${imageSrc}`}
+              sizes="100vw"
+            />
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
