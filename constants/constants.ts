@@ -4,36 +4,36 @@ import { Project, Skill } from '@/types';
 
 export const PROJECTS: Project[] = [
     {
-        id: '1',
-        title: 'E-Commerce Fusion',
-        description: 'A modern, lightning-fast shopping experience built with Next.js and Stripe integration.',
-        image: 'https://picsum.photos/seed/p1/800/600',
-        tags: ['React', 'Next.js', 'Tailwind', 'Stripe'],
-        link: '#'
+        title: "E-Commerce Fusion",
+        subtitle: "A modern, lightning-fast shopping experience built with Next.js and Stripe integration.",
+        imageSrc: "https://picsum.photos/seed/p1/800/600",
+        techStack: "React + Next.js + Tailwind + Stripe",
+        buttonText: "View Project",
+        link: "#"
     },
     {
-        id: '2',
-        title: 'Visionary Dashboard',
-        description: 'Real-time data visualization tool for enterprise-level analytics.',
-        image: 'https://picsum.photos/seed/p2/800/600',
-        tags: ['TypeScript', 'D3.js', 'Firebase'],
-        link: '#'
+        title: "Visionary Dashboard",
+        subtitle: "Real-time data visualization tool for enterprise-level analytics.",
+        imageSrc: "https://picsum.photos/seed/p2/800/600",
+        techStack: "TypeScript + D3.js + Firebase",
+        buttonText: "View Project",
+        link: "#"
     },
     {
-        id: '3',
-        title: 'Neural Network Explorer',
-        description: 'Interactive playground to understand deep learning concepts visually.',
-        image: 'https://picsum.photos/seed/p3/800/600',
-        tags: ['Python', 'TensorFlow', 'React'],
-        link: '#'
+        title: "Neural Network Explorer",
+        subtitle: "Interactive playground to understand deep learning concepts visually.",
+        imageSrc: "https://picsum.photos/seed/p3/800/600",
+        techStack: "Python + TensorFlow + React",
+        buttonText: "View Project",
+        link: "#"
     },
     {
-        id: '4',
-        title: 'Lumina Social',
-        description: 'A privacy-first social platform focused on deep connections.',
-        image: 'https://picsum.photos/seed/p4/800/600',
-        tags: ['GraphQL', 'Node.js', 'PostgreSQL'],
-        link: '#'
+        title: "Lumina Social",
+        subtitle: "A privacy-first social platform focused on deep connections.",
+        imageSrc: "https://picsum.photos/seed/p4/800/600",
+        techStack: "GraphQL + Node.js + PostgreSQL",
+        buttonText: "View Project",
+        link: "#"
     }
 ];
 
