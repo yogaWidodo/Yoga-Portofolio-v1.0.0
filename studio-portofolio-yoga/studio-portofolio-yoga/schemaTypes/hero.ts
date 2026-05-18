@@ -62,6 +62,46 @@ export const heroType = defineType({
       type: 'string',
       description: 'Contoh: 6288233181003',
     }),
+    defineField({
+      name: 'heroImages',
+      title: 'Hero / About Carousel Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              validation: (Rule) => Rule.required(),
+            }
+          ]
+        }
+      ],
+      description: 'Daftar gambar untuk carousel di bagian About'
+    }),
+    defineField({
+      name: 'galleryImages',
+      title: 'Gallery Carousel Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              validation: (Rule) => Rule.required(),
+            }
+          ]
+        }
+      ],
+      description: 'Daftar gambar untuk carousel di bagian Gallery'
+    }),
   ],
   preview: {
     select: {

@@ -39,6 +39,8 @@ export interface Hero {
   instagramUrl: string
   email: string
   whatsapp: string
+  heroImages?: Array<{ src: string; alt: string }>
+  galleryImages?: Array<{ src: string; alt: string }>
 }
 
 // Legacy types (kept for backwards compatibility)

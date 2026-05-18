@@ -157,6 +157,9 @@ export default async function Home() {
   const featuredCert = certificates.find((c) => c.featured);
   const otherCerts = certificates.filter((c) => !c.featured);
 
+  const heroCarousel = hero.heroImages?.length ? hero.heroImages : HERO_IMAGES;
+  const galleryCarousel = hero.galleryImages?.length ? hero.galleryImages : GALLERY_IMAGES;
+
   return (
     <div className="p-10">
       {/* ── Hero ── */}
@@ -199,7 +202,7 @@ export default async function Home() {
       >
         <div className="mt-20 flex flex-col md:flex-row justify-center items-center gap-10">
           <div className="w-full md:w-1/2">
-            <Carousel images={HERO_IMAGES} aspectRatio="aspect-4/5" />
+            <Carousel images={heroCarousel} aspectRatio="aspect-4/5" />
           </div>
           <div className="w-full md:w-1/2">
             <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed text-justify">
@@ -302,7 +305,7 @@ export default async function Home() {
           Gallery
         </span>
         <div>
-          <Carousel images={GALLERY_IMAGES} aspectRatio="aspect-16/9" />
+          <Carousel images={galleryCarousel} aspectRatio="aspect-16/9" />
         </div>
       </section>
 

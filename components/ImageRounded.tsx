@@ -11,7 +11,7 @@ const ImageRounded = ({ src, alt, className = "" }: ImageRoundedProps) => {
     <div className={`relative w-full h-full ${className}`}>
       <Image
         alt={alt}
-        src={src.startsWith("/") ? src : `/${src}`}
+        src={src.startsWith("/") || src.startsWith("http") ? src : `/${src}`}
         fill
         className="rounded-xl shadow-2xl opacity-90 hover:opacity-100 transition-opacity duration-700 object-cover"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -14,7 +14,15 @@ export async function getHero(): Promise<Hero | null> {
       linkedinUrl,
       instagramUrl,
       email,
-      whatsapp
+      whatsapp,
+      "heroImages": heroImages[]{
+        "src": asset->url,
+        alt
+      },
+      "galleryImages": galleryImages[]{
+        "src": asset->url,
+        alt
+      }
     }`
   )
 }
