@@ -35,7 +35,7 @@ const CertificateCard = ({
           alt={imageAlt}
           fill
           className="object-cover object-top"
-          src={imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`}
+          src={imageSrc.startsWith("/") || imageSrc.startsWith("http") ? imageSrc : `/${imageSrc}`}
           sizes="(max-width: 768px) 90vw, 40vw"
         />
       </div>

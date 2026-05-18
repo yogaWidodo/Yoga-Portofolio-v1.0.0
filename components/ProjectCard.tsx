@@ -39,7 +39,7 @@ const ProjectCard = ({
           alt={imageAlt}
           fill
           className="object-cover translate-y-10 group-hover:translate-y-0 transition-transform duration-700"
-          src={imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`}
+          src={imageSrc.startsWith("/") || imageSrc.startsWith("http") ? imageSrc : `/${imageSrc}`}
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
